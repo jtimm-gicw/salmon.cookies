@@ -1,59 +1,26 @@
 'use strict';
 
-const seattle = {
-    locationName: 'seattle',
-    customerMin: 23,
-    customerMax: 54,
-    averageCookie: 4.4,
-    cookieEachHour: [],
-    estimate: function () {
-        this.cookieEachHour = estimateSales(this);
+function CookieStore (locationName, customerMin, customerMax, averageCookie, cookieEachHour, avgCookiesPerSale) {
+    this.locationName= locationName,
+    this.customerMin= customerMin,
+    this.customerMax= customerMax,
+    this.avgCookiesPerSale = avgCookiesPerSale;
+    this.averageCookie=averageCookie,
+    this.cookieEachHour=cookieEachHour,
+    this.customersEachHour = [];
+    this.cookiesEachHour = [];
+    this.totalDailyCookies = 0;
     }
-};
 
-const tokyo = {
-    locationName: 'tokyo',
-    customerMin: 14,
-    customerMax: 33,
-    averageCookie: 9.7,
-    cookieEachHour: [],
-    estimate: function () {
-        this.cookieEachHour = estimateSales(this);
-    }
-};
+CookieStore.prototype.calCustomerEachHour= function () {// creates a prototype, will have a for loop
+    for (let i=0; i< hours.length;i++) { // i is the index starting at 0; the condition says that if i is less than number of hours it is true (will stop when it is false); finally the index will be incremented up by 1
+        this.customersEachHour.push (random(this.customerMin, this.customerMax)); // the code on this line uses a the method `this`for customerEachHour for all locations data about this. dot push adds the number to the end of the array
 
-const dubai = {
-    locationName: 'dubai',
-    customerMin: 26,
-    customerMax: 48,
-    averageCookie: 6.6,
-    cookieEachHour: [],
-    estimate: function () {
-        this.cookieEachHour = estimateSales(this);
-    }
-};
+    } 
 
-const paris = {
-    locationName: 'paris',
-    customerMin: 41,
-    customerMax: 57,
-    averageCookie: 8.4,
-    cookieEachHour: [],
-    estimate: function () {
-        this.cookieEachHour = estimateSales(this);
-    }
-};
+}
 
-const lima = {
-    locationName: 'lima',
-    customerMin: 12,
-    customerMax: 33,
-    averageCookie: 7.2,
-    cookieEachHour: [],
-    estimate: function () {
-        this.cookieEachHour = estimateSales(this);
-    }
-};
+
 
 const hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm'];
 const stores = [seattle, paris, lima, dubai, tokyo]; // Updated array name to 'stores'
@@ -67,7 +34,7 @@ function estimateSales(store) {
     for (let i = 0; i < hours.length; i++) {
         const numCustomers = random(store.customerMin, store.customerMax);
         const hourSales = Math.ceil(numCustomers * store.averageCookie);
-        sales.push(hourSales);
+        sales.push(hourSales);// adds hourSales to the end of the array sales []
     }
     return sales;
 }
