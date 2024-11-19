@@ -1,7 +1,7 @@
 'use strict';
 
-function CookieStore (locationName, customerMin, customerMax, averageCookie, cookieEachHour, avgCookiesPerSale) {
-    this.locationName= locationName,
+function CookieStore (store, customerMin, customerMax, averageCookie, cookieEachHour, avgCookiesPerSale) {
+    this.locationName= store,
     this.customerMin= customerMin,
     this.customerMax= customerMax,
     this.avgCookiesPerSale = avgCookiesPerSale;
@@ -11,6 +11,9 @@ function CookieStore (locationName, customerMin, customerMax, averageCookie, coo
     this.cookiesEachHour = [];
     this.totalDailyCookies = 0;
     }
+
+    // CookieStore (locationName, customerMin, customerMax, averageCookie, cookieEachHour, avgCookiesPerSale);
+    CookieStore();
 
 CookieStore.prototype.calCustomerEachHour= function () {// creates a prototype, will have a for loop
     for (let i=0; i< hours.length;i++) { // i is the index starting at 0; the condition says that if i is less than number of hours it is true (will stop when it is false); finally the index will be incremented up by 1
@@ -23,7 +26,7 @@ CookieStore.prototype.calCustomerEachHour= function () {// creates a prototype, 
 
 
 const hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm'];
-const stores = [seattle, paris, lima, dubai, tokyo]; // Updated array name to 'stores'
+const store = [seattle, paris, lima, dubai, tokyo]; // Updated array name to ''
 
 function random(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -43,11 +46,11 @@ function render(store) {
     let total = 0;
     const root = document.getElementById('root');
     const location = document.createElement('section');
-    location.classList.add('location');
+   //  location.classList.add('location');
     root.appendChild(location);
 
     const title = document.createElement('h2');
-    title.textContent = store.locationName;
+    title.textContent = this.store.name;
     location.appendChild(title);
 
     const list = document.createElement('ul');
@@ -66,10 +69,11 @@ function render(store) {
 }
 
 function runApplication() {
-    for (let i = 0; i < stores.length; i++) {
-        stores[i].estimate();
-        render(stores[i]);
+    for (let i = 0; i < store.length; i++) {
+        store[i].estimate();
+        render(store[i]);
     }
 }
 
+seattle.render();
 runApplication();
