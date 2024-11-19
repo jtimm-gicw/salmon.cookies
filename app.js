@@ -1,107 +1,71 @@
 'use strict';
 
-const seattle = {
-    locationName: 'seattle',
-    customerMin: 23,
-    customerMax: 54,
-    averageCookie: 4.4,
-    cookieEachHour: [],
-    estimate: function () {
-        this.cookieEachHour = estimateSales(this);
-    }
-};
-
-const tokyo = {
-    locationName: 'tokyo',
-    customerMin: 14,
-    customerMax: 33,
-    averageCookie: 9.7,
-    cookieEachHour: [],
-    estimate: function () {
-        this.cookieEachHour = estimateSales(this);
-    }
-};
-
-const dubai = {
-    locationName: 'dubai',
-    customerMin: 26,
-    customerMax: 48,
-    averageCookie: 6.6,
-    cookieEachHour: [],
-    estimate: function () {
-        this.cookieEachHour = estimateSales(this);
-    }
-};
-
-const paris = {
-    locationName: 'paris',
-    customerMin: 41,
-    customerMax: 57,
-    averageCookie: 8.4,
-    cookieEachHour: [],
-    estimate: function () {
-        this.cookieEachHour = estimateSales(this);
-    }
-};
-
-const lima = {
-    locationName: 'lima',
-    customerMin: 12,
-    customerMax: 33,
-    averageCookie: 7.2,
-    cookieEachHour: [],
-    estimate: function () {
-        this.cookieEachHour = estimateSales(this);
-    }
-};
-
 const hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm'];
-const stores = [seattle, paris, lima, dubai, tokyo]; // Updated array name to 'stores'
 
 function random(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function estimateSales(store) {
-    const sales = [];
-    for (let i = 0; i < hours.length; i++) {
-        const numCustomers = random(store.customerMin, store.customerMax);
-        const hourSales = Math.ceil(numCustomers * store.averageCookie);
-        sales.push(hourSales);
-    }
-    return sales;
+function CookieStore(store, customerMin, customerMax, averageCookie) {
+    this.locationName = store;
+    this.customerMin = customerMin;
+    this.customerMax = customerMax;
+    this.averageCookie = averageCookie;
+    this.customersEachHour = [];
+    this.cookiesEachHour = []; // Fixed typo (was cookieEachHour)
+    this.totalDailyCookies = 0;
 }
 
-function render(store) {
-    let total = 0;
+CookieStore.prototype.calCustomersEachHour = function () {
+    for (let i = 0; i < hours.length; i++) {
+        this.customersEachHour.push(random(this.customerMin, this.customerMax));
+    }
+};
+
+CookieStore.prototype.calCookiesEachHour = function () {
+    this.calCustomersEachHour();
+    for (let i = 0; i < hours.length; i++) {
+        const hourlyCookies = Math.ceil(this.customersEachHour[i] * this.averageCookie);
+        this.cookiesEachHour.push(hourlyCookies); // Fixed typo (was cookieEachHour)
+        this.totalDailyCookies += hourlyCookies;
+    }
+};
+
+CookieStore.prototype.render = function () {
     const root = document.getElementById('root');
     const location = document.createElement('section');
-    location.classList.add('location');
     root.appendChild(location);
 
     const title = document.createElement('h2');
-    title.textContent = store.locationName;
+    title.textContent = this.locationName;
     location.appendChild(title);
 
     const list = document.createElement('ul');
     location.appendChild(list);
 
     for (let i = 0; i < hours.length; i++) {
-        total += store.cookieEachHour[i];
         const listItem = document.createElement('li');
-        listItem.textContent = hours[i] + ': ' + store.cookieEachHour[i] + ' cookies';
+        listItem.textContent = `${hours[i]}: ${this.cookiesEachHour[i]} cookies`; // Fixed typo (was cookieEachHour)
         list.appendChild(listItem);
     }
 
     const totalItem = document.createElement('li');
-    totalItem.textContent = 'Total: ' + total + ' cookies';
+    totalItem.textContent = `Total: ${this.totalDailyCookies} cookies`;
     list.appendChild(totalItem);
-}
+};
+
+const seattle = new CookieStore('Seattle', 25, 42, 13);
+const paris = new CookieStore('Paris', 25, 42, 13);
+const lima = new CookieStore('Lima', 25, 42, 13);
+const dubai = new CookieStore('Dubai', 25, 42, 13);
+const tokyo = new CookieStore('Tokyo', 25, 42, 13);
+
+const stores = [seattle, paris, lima, dubai, tokyo];
 
 function runApplication() {
     for (let i = 0; i < stores.length; i++) {
-        stores[i].estimate();
-        render(stores[i]);
+        stores[i].calCookiesEachHour();
+        stores[i].render(); // Added parentheses to call the render method
     }
 }
 
