@@ -1,5 +1,7 @@
 * {
     font-family: Georgia, 'Times New Roman', Times, serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
 }
 
 body {
@@ -9,6 +11,8 @@ body {
 
 h1 {
     font-size: 60px;
+    padding-top: 40px;
+    color:whitesmoke;
 }
 
 a {
@@ -38,11 +42,7 @@ div.nav-list {
     padding: 10px;
     justify-content: center;
 }
-div {
-     margin: 0;
-     padding: 0;
-     border: 0;
-}
+
 section {
     padding: 10px;
     margin: 20px;
@@ -63,5 +63,11 @@ footer  {
     margin: 0px;
     background: darksalmon;
     color: white;
+}
+
+.salmon {
+    height: 200px;
+    width: 600px;
+    padding: 10px;
 }
 

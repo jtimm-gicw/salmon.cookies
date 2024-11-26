@@ -1,5 +1,7 @@
 * {
     font-family: Georgia, 'Times New Roman', Times, serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
 }
 
 body {
@@ -9,7 +11,8 @@ body {
 
 h1 {
     font-size: 60px;
-    
+    padding-top: 40px;
+    color:whitesmoke;
 }
 
 div {
@@ -99,3 +102,84 @@ footer  {
     background: darksalmon;
     color: white;
 }
+
+th[colspan] {
+    font-size: 1.5em; /* Adjust size as needed */
+    font-weight: bold; /* Makes it stand out */
+    text-transform: uppercase; /* Optional: Make text uppercase */
+}
+
+.salmon {
+    height: 200px;
+    width: 600px;
+}
+
+#contact {
+    width: 500px;
+    margin: 0 auto;
+}
+
+form {
+    background-color: lightsalmon;
+    padding: 20px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+fieldset {
+    background-color: white;
+    padding: 40px;
+    border: solid 1px brown;
+}
+
+form legend {
+    border: solid 1px #333;
+    background-image: url('images/blue_background.jpg');
+    padding: 5px;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+form input, form textarea {
+    display: block;
+    margin-bottom: 20px;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
+
+form label {
+    font-size: 11px;
+    text-transform: uppercase;
+}
+
+form input[type="text"], form input[type="email"], textarea {
+    padding: 10px;
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    border: 1px solid #b90707;
+}
+
+#your_message {
+    width: 400px;
+    height: 100px;
+}
+
+textarea {
+    width: 300px;
+    height: 400px;
+}
+
+form input[type="submit"]{
+    border: none;
+    background: brown;
+    height: 40px;
+    padding: 0 20px;
+    border: solid 1px #d4730c;
+    color: white;
+    font-weight: bold;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    cursor: pointer;
+}
+
