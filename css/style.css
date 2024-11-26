@@ -1,0 +1,101 @@
+* {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+body {
+    padding:0;
+    margin:0;
+}
+
+h1 {
+    font-size: 60px;
+    
+}
+
+div {
+    margin: 0;
+}
+
+div.h1 {
+    background-color: darksalmon;
+    display: flex;
+    padding: 5px;
+    justify-content: center;
+    
+}
+
+div.nav-list {
+    background-color: darksalmon;
+    display: flex;
+    padding: 10px;
+    justify-content: center;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+    margin: 80px;
+}
+
+/* General table styles */
+table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse; /* Removes gaps between borders */
+    text-align: center;
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9; /* Light background for the table */
+}
+
+/* Header row styles */
+th {
+    background-color: lightsalmon; /* Green header background */
+    color: white;
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+/* Data cell styles */
+td {
+    padding: 8px;
+    border: 1px solid #ddd; /* Border for table cells */
+}
+
+/* Highlight rows on hover */
+tr:hover {
+    background-color: #f1f1f1; /* Light gray background on hover */
+}
+
+/* Location header style (spanning multiple columns) */
+th[colspan] {
+    background-color: salmon; /* Darker green */
+    font-size: 1.2em;
+    padding: 15px;
+}
+
+/* Alternating row colors */
+tr:nth-child(even) {
+    background-color: #f2f2f2; /* Light gray for even rows */
+}
+
+/* Total column style */
+td:last-child {
+    font-weight: bold;
+    background-color: #fdfd96; /* Light yellow for totals */
+}
+
+a:hover {
+    background: brown;
+    color:  white;
+    padding: 5px;
+}
+
+footer  {
+    font-size: 20px;
+    text-align: center;
+    padding: 10px;
+    margin: 0px;
+    background: darksalmon;
+    color: white;
+}

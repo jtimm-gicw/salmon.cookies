@@ -1,0 +1,67 @@
+* {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+body {
+    padding:0;
+    margin:0;
+}
+
+h1 {
+    font-size: 60px;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+    margin: 80px;
+}
+
+a:hover {
+    background: brown;
+    color:  white;
+    padding: 5px;
+}
+
+div.h1 {
+    background-color: darksalmon;
+    display: flex;
+    padding: 5px;
+    justify-content: center;
+    
+}
+
+div.nav-list {
+    background-color: darksalmon;
+    display: flex;
+    padding: 10px;
+    justify-content: center;
+}
+div {
+     margin: 0;
+     padding: 0;
+     border: 0;
+}
+section {
+    padding: 10px;
+    margin: 20px;
+}
+
+h2 {
+    font-size: 45px;
+}
+
+p {
+    font-size: 30px;
+}
+
+footer  {
+    font-size: 20px;
+    text-align: center;
+    padding: 10px;
+    margin: 0px;
+    background: darksalmon;
+    color: white;
+}
+
