@@ -39,6 +39,7 @@ a {
     color: white;
     font-size: 20px;
     margin: 80px;
+    font-weight: bold;
 }
 
 /* General table styles */
@@ -119,7 +120,18 @@ th[colspan] {
     margin: 0 auto;
 }
 
-form {
+#form1 input:focus,
+#form1 textarea:focus {
+    border-color: darksalmon; /* Highlight the input when focused */
+    outline: none;
+    box-shadow: 0 0 5px rgba(233, 87, 63, 0.7);
+}
+
+#form1 {
+    margin-top: 20px;
+}
+
+#form2 {
     background-color: lightsalmon;
     padding: 20px;
     font-family: Georgia, 'Times New Roman', Times, serif;
@@ -127,10 +139,13 @@ form {
     margin-bottom: 20px;
 }
 
+
+
 fieldset {
     background-color: white;
     padding: 40px;
     border: solid 1px brown;
+    font-weight: bold
 }
 
 form legend {
@@ -139,6 +154,12 @@ form legend {
     padding: 5px;
     font-size: 30px;
     font-weight: bold;
+    width:100%;
+}
+
+form legend.cookieLegend {
+    text-align: center;
+    /* centered the text */
 }
 
 form input, form textarea {
@@ -146,11 +167,14 @@ form input, form textarea {
     margin-bottom: 20px;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+
 }
 
+
 form label {
-    font-size: 11px;
-    text-transform: uppercase;
+        display: block; /* Labels on their own line */
+        margin-bottom: 5px;
+        font-weight: bold;
 }
 
 form input[type="text"], form input[type="email"], textarea {
@@ -158,6 +182,17 @@ form input[type="text"], form input[type="email"], textarea {
     font-size: 20px;
     font-family: Arial, Helvetica, sans-serif;
     color: white;
+    border: 1px solid #b90707;
+    width: 60%;
+}
+
+#averageCookiesInput {
+    width: 45%; /* Adjust to your desired width */
+  }
+
+form input[type="number"] {
+    width: 30%;
+    height: 40px;
     border: 1px solid #b90707;
 }
 

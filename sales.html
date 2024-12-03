@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
     <link href="css/reset.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
     <title>Salmon Cookie Sales</title>
@@ -13,15 +14,42 @@
             <div class="h1"><h1>Salmon Cookies Sales</h1>
                 <img src="images/salmon.png" alt="a picture of a salmon" class="salmon"> 
             </div> 
+
             <div class="nav-list">
                 <nav>
-                        <ul>
-                            <a href="index.html">Home</a>
-                            <a href="sales.html">Sales</a>
-                            <a href="contact.html">Contact Us</a>
-                        </ul>
+                    <ul>
+                        <a href="index.html"><strong>Home</strong></a>
+                        
+                        <a href="sales.html"><strong>Sales</strong></a>
+
+                        <a href="contact.html"><strong>Contact Us</strong></a>
+                        
+                    </ul>
                 </nav>
             </div>
+
+            <div id="form1"><!---start of form-->
+                <form>
+                    <fieldset id="addCookies">
+                        <legend class="cookieLegend">Add Some Cookies!</legend>
+
+                        <label id="newLocation">Location</label>
+                        <input name="New Location" type="text" placeholder="add location here">
+
+                        <label id="minCookies">Min. Cookies</label>
+                        <input name="Min Cookies Sold" type="number">
+
+                        <label id="maxCookies">Max. Cookkies</label>
+                        <input name="Max Cookies Sold" type="number">
+
+                        <label id="avgCookies">Average Cookies Sold</label>
+                        <input name="Average Cookies Sold" type="text" >
+                
+                        <input type="submit" value="Submit">
+
+                    </fieldset>
+                </form>
+            </div><!---end of form-->
 
             <div id="root">
             </div>
