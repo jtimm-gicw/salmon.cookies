@@ -28,28 +28,29 @@
                 </nav>
             </div>
 
-            <div id="form1"><!---start of form-->
-                <form>
+            <div id="form1">
+                <!-- Start of form -->
+                <form id="cookieStandForm">
                     <fieldset id="addCookies">
                         <legend class="cookieLegend">Add Some Cookies!</legend>
-
-                        <label id="newLocation">Location</label>
-                        <input name="New Location" type="text" placeholder="add location here">
-
-                        <label id="minCookies">Min. Cookies</label>
-                        <input name="Min Cookies Sold" type="number">
-
-                        <label id="maxCookies">Max. Cookkies</label>
-                        <input name="Max Cookies Sold" type="number">
-
-                        <label id="avgCookies">Average Cookies Sold</label>
-                        <input name="Average Cookies Sold" type="text" >
-                
+            
+                        <label for="location">Location</label>
+                        <input id="location" name="newLocation" type="text" placeholder="Add location here" required>
+            
+                        <label for="minCookies">Min. Cookies</label>
+                        <input id="minCookies" name="minCookiesSold" type="number" placeholder="Minimum Cookies" required>
+            
+                        <label for="maxCookies">Max. Cookies</label>
+                        <input id="maxCookies" name="maxCookiesSold" type="number" placeholder="Maximum Cookies" required>
+            
+                        <label for="avgCookies">Average Cookies Sold</label>
+                        <input id="avgCookies" name="averageCookiesSold" type="number" placeholder="Average Cookies" required>
+            
                         <input type="submit" value="Submit">
-
                     </fieldset>
                 </form>
-            </div><!---end of form-->
+            </div>
+            
 
             <div id="root">
             </div>

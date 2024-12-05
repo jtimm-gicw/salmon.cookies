@@ -73,6 +73,7 @@ CookieStore.prototype.render = function () {
    table.setAttribute('border', '1');
 
    root.appendChild(table);
+   table.id='cookieTable'; //added the id tag to the table
 
 
 
@@ -112,7 +113,9 @@ CookieStore.prototype.render = function () {
 
     table.appendChild(hoursRow);
 
-
+     // Create a <tbody> for the table
+     const tbody = document.createElement('tbody');
+     table.appendChild(tbody);
 
     const dataRow = document.createElement('tr');
 
@@ -169,6 +172,54 @@ function runApplication() {
 }
 
 
-
 runApplication();
 
+// -------------FORM STARTS HERE-----------
+
+const form= document.getElementById('cookieStandForm');
+// selects the form you can attach an event listener to
+const table= document.getElementById('cookieTable').querySelectorAll('tbody');
+// selects the table body the new row will be added to
+
+
+
+// function addCookieStand(){
+//     const location= document.getElementById('location').value;
+//     const cookie= document.getElementById('cookie').value;
+
+//     //Creates a new row
+//     const row= document.createElement('tr');
+//     //Creates a new cell for the location put into the form
+//     const locationCell= document.createElement('td');
+//     //Adds the info into the cell
+//     locationCell.textContent = location;
+//     //Creates a new cell for the cookies
+//     const cookiesCell= document.createElement('td');
+//     cookiesCell.textContent = cookie;
+
+//     //Appends cell to the row 
+//     row.appendChild(locationCell);
+//     row.appendChild(cookiesCell);
+
+//     //Appends row to table
+//     table.appendChild(row);
+
+//     //clear the form
+//     form.reset();
+// }
+form.addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    const location = document.getElementById('location').value;
+    const minCookies = parseInt(document.getElementById('minCookies').value);
+    const maxCookies = parseInt(document.getElementById('maxCookies').value);
+    const avgCookies = parseFloat(document.getElementById('avgCookies').value);
+
+    // Create and render a new store
+    const newStore = new CookieStore(location, minCookies, maxCookies, avgCookies);
+    newStore.calCookiesEachHour();
+    newStore.render();
+
+    // Reset form after submission
+    form.reset();
+});
