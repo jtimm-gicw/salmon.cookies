@@ -1,66 +1,116 @@
 <!DOCTYPE html>
+<!-- Tells the browser this is an HTML5 document -->
 <html lang="en">
 <head>
+    <!-- Character encoding -->
     <meta charset="UTF-8">
+
+    <!-- Makes the page responsive on different screen sizes -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Google Font used for headings/text -->
     <link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
+
+    <!-- CSS reset to remove browser default styles -->
     <link href="css/reset.css" rel="stylesheet">
+
+    <!-- Main custom styles for this site -->
     <link href="css/style.css" rel="stylesheet">
+
+    <!-- Title shown in the browser tab -->
     <title>Salmon Cookie Sales</title>
-
 </head>
-    <main>
-        <body>
-            <div class="h1"><h1>Salmon Cookies Sales</h1>
-                <img src="images/salmon.png" alt="a picture of a salmon" class="salmon"> 
-            </div> 
 
-            <div class="nav-list">
-                <nav>
-                    <ul>
-                        <a href="index.html"><strong>Home</strong></a>
-                        
-                        <a href="sales.html"><strong>Sales</strong></a>
+<!-- Main content area of the page -->
+<main>
 
-                        <a href="contact.html"><strong>Contact Us</strong></a>
-                        
-                    </ul>
-                </nav>
-            </div>
+    <!-- Page body content -->
+    <body>
 
-            <div id="form1">
-                <!-- Start of form -->
-                <form id="cookieStandForm">
-                    <fieldset id="addCookies">
-                        <legend class="cookieLegend">Add Some Cookies!</legend>
-            
-                        <label for="location">Location</label>
-                        <input id="location" name="newLocation" type="text" placeholder="Add location here" required>
-            
-                        <label for="minCookies">Min. Cookies</label>
-                        <input id="minCookies" name="minCookiesSold" type="number" placeholder="Minimum Cookies" required>
-            
-                        <label for="maxCookies">Max. Cookies</label>
-                        <input id="maxCookies" name="maxCookiesSold" type="number" placeholder="Maximum Cookies" required>
-            
-                        <label for="avgCookies">Average Cookies Sold</label>
-                        <input id="avgCookies" name="averageCookiesSold" type="number" placeholder="Average Cookies" required>
-            
-                        <input type="submit" value="Submit">
-                    </fieldset>
-                </form>
-            </div>
-            
+        <!-- Page header section -->
+        <div class="h1">
+            <h1>Salmon Cookies Sales</h1>
 
-            <div id="root">
-            </div>
-    </main>  
+            <!-- Logo / decorative image -->
+            <img src="images/salmon.png"
+                 alt="a picture of a salmon"
+                 class="salmon"> 
+        </div> 
 
+        <!-- Navigation bar -->
+        <div class="nav-list">
+            <nav>
+                <ul>
+                    <!-- Navigation links -->
+                    <a href="index.html"><strong>Home</strong></a>
+                    <a href="sales.html"><strong>Sales</strong></a>
+                    <a href="contact.html"><strong>Contact Us</strong></a>
+                </ul>
+            </nav>
+        </div>
 
-    <footer id="footer">
-        <p>&copy; JSTimm 2024</p>
-    </footer>  
+        <!-- Form container -->
+        <div id="form1">
 
-    <script src="app.js"></script>
-</body>
+            <!-- Form used to add a new cookie store -->
+            <form id="cookieStandForm">
+
+                <!-- Groups related form inputs -->
+                <fieldset id="addCookies">
+
+                    <!-- Title for the form -->
+                    <legend class="cookieLegend">Add Some Cookies!</legend>
+
+                    <!-- Store location input -->
+                    <label for="location">Location</label>
+                    <input id="location"
+                           name="newLocation"
+                           type="text"
+                           placeholder="Add location here"
+                           required>
+
+                    <!-- Minimum cookies per hour -->
+                    <label for="minCookies">Min. Cookies</label>
+                    <input id="minCookies"
+                           name="minCookiesSold"
+                           type="number"
+                           placeholder="Minimum Cookies"
+                           required>
+
+                    <!-- Maximum cookies per hour -->
+                    <label for="maxCookies">Max. Cookies</label>
+                    <input id="maxCookies"
+                           name="maxCookiesSold"
+                           type="number"
+                           placeholder="Maximum Cookies"
+                           required>
+
+                    <!-- Average cookies sold per customer -->
+                    <label for="avgCookies">Average Cookies Sold</label>
+                    <input id="avgCookies"
+                           name="averageCookiesSold"
+                           type="number"
+                           placeholder="Average Cookies"
+                           required>
+
+                    <!-- Submit button -->
+                    <input type="submit" value="Submit">
+                </fieldset>
+            </form>
+        </div>
+
+        <!-- Root div where JavaScript renders the table -->
+        <div id="root"></div>
+
+    </body>
+</main>  
+
+<!-- Footer section -->
+<footer id="footer">
+    <p>&copy; JSTimm 2024</p>
+</footer>  
+
+<!-- JavaScript file that controls the app logic -->
+<script src="app.js"></script>
+
 </html>

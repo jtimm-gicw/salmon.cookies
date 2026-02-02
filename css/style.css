@@ -150,7 +150,6 @@ fieldset {
 
 form legend {
     border: solid 1px #333;
-    background-image: url('images/blue_background.jpg');
     padding: 5px;
     font-size: 30px;
     font-weight: bold;
