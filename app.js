@@ -13,6 +13,9 @@ const hours = [
   '6pm', '7pm'
 ];
 
+// ⭐ CHANGED: Added global array to manage all stores
+const stores = [];
+
 
 /* =====================================================
    HELPER FUNCTION
@@ -44,6 +47,9 @@ function CookieStore(store, customerMin, customerMax, averageCookie) {
 
   // Running total for the day
   this.totalDailyCookies = 0;
+
+  // ⭐ CHANGED: Automatically add each new store to global stores array
+  stores.push(this);
 }
 
 
@@ -53,91 +59,106 @@ function CookieStore(store, customerMin, customerMax, averageCookie) {
    Functions shared by all CookieStore objects
    ===================================================== */
 
-// Calculate number of customers each hour
-CookieStore.prototype.calCustomersEachHour = function () {
+// Calculate cookies sold each hour (combined method)
+CookieStore.prototype.calculateData = function () {
+
+  // ⭐ CHANGED: Reset arrays and totals to prevent duplication bug
+  this.customersEachHour = [];
+  this.cookiesEachHour = [];
+  this.totalDailyCookies = 0;
+
   for (let i = 0; i < hours.length; i++) {
-    this.customersEachHour.push(
-      random(this.customerMin, this.customerMax)
-    );
-  }
-};
+    const customers = random(this.customerMin, this.customerMax);
+    const hourlyCookies = Math.ceil(customers * this.averageCookie);
 
-// Calculate cookies sold each hour
-CookieStore.prototype.calCookiesEachHour = function () {
-  // First get customers per hour
-  this.calCustomersEachHour();
-
-  // Then calculate cookies per hour
-  for (let i = 0; i < hours.length; i++) {
-    const hourlyCookies = Math.ceil(
-      this.customersEachHour[i] * this.averageCookie
-    );
-
+    this.customersEachHour.push(customers);
     this.cookiesEachHour.push(hourlyCookies);
     this.totalDailyCookies += hourlyCookies;
   }
 };
 
 
-/* =====================================================
-   RENDER METHOD
-   -----------------------------------------------------
-   Creates and displays the HTML table for one store
-   ===================================================== */
+// ⭐ CHANGED: render() no longer creates a full table
+// It now renders only ONE ROW inside an existing table
+CookieStore.prototype.renderRow = function (tbody) {
 
-CookieStore.prototype.render = function () {
-  const root = document.getElementById('root');
+  const row = document.createElement('tr');
 
-  // Create the table
-  const table = document.createElement('table');
-  table.setAttribute('border', '1');
-  table.id = 'cookieTable';
-  root.appendChild(table);
+  // Store Name Column
+  const nameCell = document.createElement('th');
+  nameCell.textContent = this.locationName;
+  row.appendChild(nameCell);
 
-  /* ---------- Store Name Header ---------- */
-  const headerRow = document.createElement('tr');
-  const headerCell = document.createElement('th');
-
-  headerCell.setAttribute('colspan', hours.length + 2);
-  headerCell.textContent = this.locationName;
-
-  headerRow.appendChild(headerCell);
-  table.appendChild(headerRow);
-
-  /* ---------- Hours Header Row ---------- */
-  const hoursRow = document.createElement('tr');
-
-  for (let i = 0; i < hours.length; i++) {
-    const hourCell = document.createElement('th');
-    hourCell.textContent = hours[i];
-    hoursRow.appendChild(hourCell);
+  // Hourly Data Columns
+  for (let i = 0; i < this.cookiesEachHour.length; i++) {
+    const cell = document.createElement('td');
+    cell.textContent = this.cookiesEachHour[i];
+    row.appendChild(cell);
   }
 
+  // Total Column
+  const totalCell = document.createElement('td');
+  totalCell.textContent = this.totalDailyCookies;
+  row.appendChild(totalCell);
+
+  tbody.appendChild(row);
+};
+
+
+/* =====================================================
+   TABLE CREATION
+   -----------------------------------------------------
+   Creates one shared table for all stores
+   ===================================================== */
+
+// ⭐ CHANGED: Table header is now created once globally
+function createTableHeader(table) {
+
+  const thead = document.createElement('thead');
+  const row = document.createElement('tr');
+
+  // Location Header
+  const locationHeader = document.createElement('th');
+  locationHeader.textContent = 'Location';
+  row.appendChild(locationHeader);
+
+  // Hour Headers
+  for (let i = 0; i < hours.length; i++) {
+    const th = document.createElement('th');
+    th.textContent = hours[i];
+    row.appendChild(th);
+  }
+
+  // Total Header
   const totalHeader = document.createElement('th');
   totalHeader.textContent = 'Total';
-  hoursRow.appendChild(totalHeader);
+  row.appendChild(totalHeader);
 
-  table.appendChild(hoursRow);
+  thead.appendChild(row);
+  table.appendChild(thead);
+}
 
-  /* ---------- Table Body ---------- */
+
+// ⭐ CHANGED: New controller function renders ALL stores in ONE table
+function renderAllStores() {
+
+  const root = document.getElementById('root');
+  root.innerHTML = ''; // Clears previous table before re-render
+
+  const table = document.createElement('table');
+  table.setAttribute('border', '1');
+  root.appendChild(table);
+
+  createTableHeader(table);
+
   const tbody = document.createElement('tbody');
   table.appendChild(tbody);
 
-  const dataRow = document.createElement('tr');
-
-  for (let i = 0; i < this.cookiesEachHour.length; i++) {
-    const dataCell = document.createElement('td');
-    dataCell.textContent = this.cookiesEachHour[i];
-    dataRow.appendChild(dataCell);
+  for (let i = 0; i < stores.length; i++) {
+    stores[i].calculateData();
+    stores[i].renderRow(tbody);
   }
-
-  // Total column
-  const totalCell = document.createElement('td');
-  totalCell.textContent = this.totalDailyCookies;
-  dataRow.appendChild(totalCell);
-
-  tbody.appendChild(dataRow);
-};
+}
 
 
 /* =====================================================
@@ -146,14 +167,11 @@ CookieStore.prototype.render = function () {
    Individual cookie store instances
    ===================================================== */
 
-const seattle = new CookieStore('Seattle', 25, 42, 13);
-const paris   = new CookieStore('Paris', 25, 42, 13);
-const lima    = new CookieStore('Lima', 25, 42, 13);
-const dubai   = new CookieStore('Dubai', 25, 42, 13);
-const tokyo   = new CookieStore('Tokyo', 25, 42, 13);
-
-// Array to manage all stores together
-const stores = [seattle, paris, lima, dubai, tokyo];
+new CookieStore('Seattle', 23, 65, 6.3);
+new CookieStore('Tokyo', 3, 24, 1.2);
+new CookieStore('Dubai', 11, 38, 3.7);
+new CookieStore('Paris', 20, 38, 2.3);
+new CookieStore('Lima', 2, 16, 4.6);
 
 
 /* =====================================================
@@ -162,47 +180,49 @@ const stores = [seattle, paris, lima, dubai, tokyo];
    Runs the app logic in the correct order
    ===================================================== */
 
-function runApplication() {
-  for (let i = 0; i < stores.length; i++) {
-    stores[i].calCookiesEachHour();
-    stores[i].render();
+// ⭐ CHANGED: Wrapped in DOMContentLoaded for safety
+document.addEventListener('DOMContentLoaded', function () {
+
+  renderAllStores();
+
+
+  /* =====================================================
+     FORM HANDLING
+     -----------------------------------------------------
+     Allows users to add a new cookie store
+     ===================================================== */
+
+  // Select the form
+  const form = document.getElementById('cookieStandForm');
+
+  if (form) { // ⭐ CHANGED: Prevent crash if form not found
+
+    // Listen for form submission
+    form.addEventListener('submit', function (event) {
+
+      event.preventDefault(); // Stop page refresh
+
+      // Get user input values
+      const location = document.getElementById('location').value;
+      const minCookies = parseInt(document.getElementById('minCookies').value);
+      const maxCookies = parseInt(document.getElementById('maxCookies').value);
+      const avgCookies = parseFloat(document.getElementById('avgCookies').value);
+
+      // ⭐ CHANGED: Basic validation check
+      if (minCookies > maxCookies) {
+        alert('Minimum customers cannot be greater than maximum.');
+        return;
+      }
+
+      // Create new store
+      new CookieStore(location, minCookies, maxCookies, avgCookies);
+
+      // ⭐ CHANGED: Re-render entire table instead of adding new table
+      renderAllStores();
+
+      // Clear the form
+      form.reset();
+    });
   }
-}
 
-// Start the application
-runApplication();
-
-
-/* =====================================================
-   FORM HANDLING
-   -----------------------------------------------------
-   Allows users to add a new cookie store
-   ===================================================== */
-
-// Select the form
-const form = document.getElementById('cookieStandForm');
-
-// Listen for form submission
-form.addEventListener('submit', function (event) {
-  event.preventDefault(); // Stop page refresh
-
-  // Get user input values
-  const location   = document.getElementById('location').value;
-  const minCookies = parseInt(document.getElementById('minCookies').value);
-  const maxCookies = parseInt(document.getElementById('maxCookies').value);
-  const avgCookies = parseFloat(document.getElementById('avgCookies').value);
-
-  // Create and render the new store
-  const newStore = new CookieStore(
-    location,
-    minCookies,
-    maxCookies,
-    avgCookies
-  );
-
-  newStore.calCookiesEachHour();
-  newStore.render();
-
-  // Clear the form
-  form.reset();
 });
